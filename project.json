@@ -1,0 +1,22 @@
+{
+  "overview": "A Portuguese-language business website for TXMOVÉL Angola, a construction-materials supplier in Luanda, with a product catalogue, quote requests, and an owner dashboard.",
+  "features": [
+    "Homepage with the new brand headline and product highlights",
+    "Quem Somos section describing the company",
+    "Catalogue of the five real construction products",
+    "Three reasons to choose TXMOVÉL",
+    "Quote request form",
+    "Owner dashboard and menu panel that can be hidden or shown",
+    "Settings page to set and change the owner password",
+    "Owner can create email and password accounts for other users"
+  ],
+  "category": "business-website",
+  "tags": [
+    "construction",
+    "materials",
+    "angola",
+    "business",
+    "portuguese"
+  ],
+  "last_updated": "2026-10-09T22:36:04.738Z"
+}

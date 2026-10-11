@@ -1,0 +1,243 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Fonts: Space Grotesk (display) · Plus Jakarta Sans (body) · JetBrains Mono (spec/mono) ── */
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/assets/fonts/SpaceGrotesk.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("/assets/fonts/PlusJakartaSans.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/assets/fonts/JetBrainsMono.woff2") format("woff2");
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --font-display: "Space Grotesk";
+    --font-body: "Plus Jakarta Sans";
+    --font-mono: "JetBrains Mono";
+
+    /* Fundição — cold steel surfaces, graphite ink, molten amber signal */
+    --background: 0.965 0.004 250;
+    --foreground: 0.205 0.014 255;
+    --card: 0.995 0.002 250;
+    --card-foreground: 0.205 0.014 255;
+    --popover: 0.995 0.002 250;
+    --popover-foreground: 0.205 0.014 255;
+    --primary: 0.44 0.135 245;
+    --primary-foreground: 0.975 0.004 245;
+    --secondary: 0.915 0.012 235;
+    --secondary-foreground: 0.27 0.02 245;
+    --muted: 0.915 0.012 235;
+    --muted-foreground: 0.475 0.016 245;
+    --accent: 0.74 0.155 68;
+    --accent-foreground: 0.205 0.02 68;
+    --destructive: 0.55 0.215 27;
+    --destructive-foreground: 0.975 0.004 27;
+    --success: 0.58 0.15 148;
+    --success-foreground: 0.975 0.004 148;
+    --warning: 0.8 0.15 82;
+    --warning-foreground: 0.205 0.02 82;
+    --border: 0.875 0.012 240;
+    --input: 0.875 0.012 240;
+    --ring: 0.44 0.135 245;
+    --radius: 0.375rem;
+
+    /* Existing component token names — retuned to the industrial palette */
+    --cream: 0.965 0.004 250;
+    --sand: 0.915 0.012 235;
+    --espresso: 0.205 0.014 255;
+    --cocoa: 0.44 0.135 245;
+    --clay: 0.44 0.135 245;
+    --clay-dark: 0.36 0.12 245;
+
+    --gradient-primary: linear-gradient(
+      135deg,
+      oklch(0.44 0.135 245),
+      oklch(0.34 0.11 248)
+    );
+    --gradient-accent: linear-gradient(
+      135deg,
+      oklch(0.78 0.15 72),
+      oklch(0.7 0.16 60)
+    );
+    --gradient-steel: linear-gradient(
+      180deg,
+      oklch(0.97 0.004 250),
+      oklch(0.93 0.01 240)
+    );
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --font-display-stack: var(--font-display), "Space Grotesk", system-ui,
+      sans-serif;
+    --font-body-stack: var(--font-body), "Plus Jakarta Sans", system-ui,
+      sans-serif;
+
+    --shadow-subtle: 0 1px 2px 0 oklch(0.2 0.01 250 / 0.05), 0 1px 3px 0
+      oklch(0.2 0.01 250 / 0.07);
+    --shadow-elevated: 0 8px 24px -6px oklch(0.2 0.02 250 / 0.14), 0 2px 8px
+      -3px oklch(0.2 0.02 250 / 0.09);
+  }
+
+  .dark {
+    --background: 0.16 0.012 250;
+    --foreground: 0.945 0.006 245;
+    --card: 0.205 0.014 250;
+    --card-foreground: 0.945 0.006 245;
+    --popover: 0.205 0.014 250;
+    --popover-foreground: 0.945 0.006 245;
+    --primary: 0.78 0.13 243;
+    --primary-foreground: 0.16 0.012 245;
+    --secondary: 0.255 0.018 245;
+    --secondary-foreground: 0.9 0.008 245;
+    --muted: 0.255 0.018 245;
+    --muted-foreground: 0.65 0.014 245;
+    --accent: 0.78 0.15 70;
+    --accent-foreground: 0.16 0.02 70;
+    --destructive: 0.62 0.2 27;
+    --destructive-foreground: 0.95 0.006 27;
+    --success: 0.66 0.15 148;
+    --success-foreground: 0.16 0.012 148;
+    --warning: 0.8 0.15 82;
+    --warning-foreground: 0.16 0.02 82;
+    --border: 0.3 0.016 245;
+    --input: 0.3 0.016 245;
+    --ring: 0.78 0.13 243;
+
+    --cream: 0.16 0.012 250;
+    --sand: 0.205 0.014 250;
+    --espresso: 0.945 0.006 245;
+    --cocoa: 0.78 0.13 243;
+    --clay: 0.78 0.13 243;
+    --clay-dark: 0.7 0.12 243;
+
+    --gradient-steel: linear-gradient(
+      180deg,
+      oklch(0.18 0.014 250),
+      oklch(0.14 0.01 245)
+    );
+    --shadow-subtle: 0 1px 2px 0 oklch(0 0 0 / 0.4);
+    --shadow-elevated: 0 8px 24px -6px oklch(0 0 0 / 0.5);
+  }
+}
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-cream: var(--cream);
+  --color-sand: var(--sand);
+  --color-espresso: var(--espresso);
+  --color-cocoa: var(--cocoa);
+  --color-clay: var(--clay);
+  --color-clay-dark: var(--clay-dark);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+  --font-sans: var(--font-body-stack);
+  --font-serif: var(--font-display-stack);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 4px);
+  --radius-xl: calc(var(--radius) + 10px);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    color-scheme: light;
+  }
+
+  body {
+    @apply bg-cream font-sans text-espresso antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display-stack);
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display-stack);
+  }
+  .font-body {
+    font-family: var(--font-body-stack);
+  }
+  .font-mono {
+    font-family: var(--font-mono), monospace;
+  }
+  .bg-gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+  .bg-gradient-accent {
+    background-image: var(--gradient-accent);
+  }
+  .bg-gradient-steel {
+    background-image: var(--gradient-steel);
+  }
+  .text-gradient-accent {
+    background-image: var(--gradient-accent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .shadow-subtle {
+    box-shadow: var(--shadow-subtle);
+  }
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+  .spec-label {
+    font-family: var(--font-mono), monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .surface-grid {
+    background-image: linear-gradient(
+        oklch(from var(--border) l c h / 0.5) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        90deg,
+        oklch(from var(--border) l c h / 0.5) 1px,
+        transparent 1px
+      );
+    background-size: 40px 40px;
+  }
+}

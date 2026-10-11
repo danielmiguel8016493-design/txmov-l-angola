@@ -1,0 +1,174 @@
+type Value = 
+ variant {
+   "bool": bool;
+   float: float64;
+   "int": int;
+   "nat": nat;
+   "null";
+   "text": text;
+ };
+type UserRole = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type Timestamp = nat;
+type Testimonial = 
+ record {
+   author: text;
+   id: nat;
+   quote: text;
+ };
+type TeamMember = 
+ record {
+   bio: text;
+   id: nat;
+   name: text;
+   photo: text;
+   role: text;
+ };
+type Service = 
+ record {
+   description: text;
+   duration: text;
+   id: nat;
+   name: text;
+   price: text;
+ };
+type Result__1 = 
+ variant {
+   err: Error;
+   ok;
+ };
+type Result = 
+ record {
+   hasMore: bool;
+   rows: vec vec Cell;
+ };
+type OwnerAuthResult = 
+ variant {
+   err: text;
+   ok: text;
+ };
+type GalleryImage = 
+ record {
+   caption: text;
+   id: nat;
+   url: text;
+ };
+type Error = 
+ variant {
+   AmbiguousAttribute: record {
+                         field: text;
+                         sources: vec text;
+                       };
+   FrontendOriginMismatch: record {
+                             expected: vec text;
+                             got: text;
+                           };
+   FrontendOriginsNotConfigured;
+   MalformedCandid;
+   MissingField: text;
+   MixedSsoSources: record {
+                      otherKeys: vec text;
+                      ssoKeys: vec text;
+                    };
+   NoAttributes;
+   Stale: record {ageNs: nat;};
+   UnknownNonce;
+   UntrustedSsoSource: record {domain: text;};
+ };
+type DayHours = 
+ record {
+   days: text;
+   hours: text;
+ };
+type Cell = 
+ record {
+   name: text;
+   value: Value;
+ };
+type CatalogueNote = record {note: text;};
+type BusinessInfo = 
+ record {
+   address: text;
+   email: text;
+   name: text;
+   openingHours: vec DayHours;
+   phone: text;
+   tagline: text;
+ };
+type BookingRequest = 
+ record {
+   contact: text;
+   createdAt: Timestamp;
+   handled: bool;
+   id: nat;
+   message: text;
+   name: text;
+   preferredTime: text;
+   "service": text;
+ };
+type AuthResult = 
+ variant {
+   err: text;
+   ok: record {
+         account: AccountView;
+         token: text;
+       };
+ };
+type AccountView = 
+ record {
+   active: bool;
+   createdAt: nat;
+   displayName: text;
+   email: text;
+   id: AccountId;
+ };
+type AccountId = nat;
+service : {
+  __accessControlState: () -> (reserved) query;
+  __accountsState: () -> (reserved) query;
+  __bookingRequests: () -> (reserved) query;
+  __businessInfo: () -> (BusinessInfo) query;
+  __catalogueNote: () -> (CatalogueNote) query;
+  __gallery: () -> (vec GalleryImage) query;
+  __requestState: () -> (reserved) query;
+  __services: () -> (vec Service) query;
+  __team: () -> (vec TeamMember) query;
+  __testimonials: () -> (vec Testimonial) query;
+  _initialize_access_control: () -> ();
+  _internet_identity_sign_in_finish: () -> (Result__1);
+  _internet_identity_sign_in_start: () -> (blob);
+  assignCallerUserRole: (user: principal, role: UserRole) -> ();
+  changeOwnerPassword: (currentPassword: text, newPassword: text) ->
+   (OwnerAuthResult);
+  createAccount: (email: text, password: text, displayName: text) ->
+   (AccountView);
+  deleteAccount: (id: AccountId) -> ();
+  deleteBookingRequest: (id: nat) -> ();
+  execute: (qJson: text) -> (Result) query;
+  getApiDoc: () -> (text) query;
+  getBusinessInfo: () -> (BusinessInfo) query;
+  getCallerUserRole: () -> (UserRole) query;
+  getCatalogueNote: () -> (CatalogueNote) query;
+  getGallery: () -> (vec GalleryImage) query;
+  getServices: () -> (vec Service) query;
+  getSessionAccount: (token: text) -> (opt AccountView) query;
+  getTeam: () -> (vec TeamMember) query;
+  getTestimonials: () -> (vec Testimonial) query;
+  isCallerAdmin: () -> (bool) query;
+  isOwnerPasswordSet: () -> (bool) query;
+  listAccounts: () -> (vec AccountView) query;
+  listBookingRequests: () -> (vec BookingRequest) query;
+  ownerSignIn: (password: text) -> (OwnerAuthResult);
+  schema: () -> (text) query;
+  setAccountActive: (id: AccountId, active: bool) -> ();
+  setBookingRequestHandled: (id: nat, handled: bool) -> ();
+  setOwnerPassword: (password: text) -> ();
+  signIn: (email: text, password: text) -> (AuthResult);
+  signOut: (token: text) -> ();
+  submitBookingRequest: (name: text, contact: text, "service": text,
+   preferredTime: text, message: text) -> (nat);
+}
